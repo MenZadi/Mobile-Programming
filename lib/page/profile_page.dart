@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
               // NAME
               const Text(
-                "John Doe",
+                "Ahmad Zaki Sopian",
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.blueGrey,

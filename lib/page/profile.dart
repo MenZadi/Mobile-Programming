@@ -12,15 +12,15 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   // Data profil
-  String name = 'Jhon Doe';
+  String name = 'Ahmad Zaki Sopian';
   String bio =
       'Mahasiswa Sistem Informasi yang memiliki minat dan fokus dalam bidang Mobile Programming.'
       'Memiliki kemampuan dalam pengembangan aplikasi mobile menggunakan Flutter serta memahami dasar-dasar UI/UX, integrasi API, dan manajemen data.'
       'Aktif belajar dan mengembangkan proyek aplikasi untuk meningkatkan keterampilan teknis.';
   String location = 'Jakarta, Indonesia';
-  String email = 'jhon.doe@example.com';
-  String phone = '+62 123-4567-2292';
-  String birthday = 'March 15, 2000';
+  String email = 'zakysofyan02@gmail.com';
+  String phone = '+62 85173061102';
+  String birthday = 'November 11, 2000';
   String occupation = 'Mobile Programmer at Universitas Pamulang';
 
   // Support both network URL and local file
