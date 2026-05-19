@@ -9,16 +9,12 @@ class AutocompletespinPage extends StatefulWidget {
 
 class _CompleteFormPageState extends State<AutocompletespinPage> {
   final _formKey = GlobalKey<FormState>();
-
-  // Controllers untuk Autocomplete
   final TextEditingController _universityController = TextEditingController();
   final TextEditingController _majorController = TextEditingController();
 
-  // Selected values untuk dropdown
   String? _selectedEducationLevel;
   String? _selectedYear;
 
-  // Data options
   final List<String> _universities = [
     'Universitas Indonesia',
     'Institut Teknologi Bandung',
@@ -94,7 +90,6 @@ class _CompleteFormPageState extends State<AutocompletespinPage> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            // Form Card
             Card(
               elevation: 8,
               shadowColor: Colors.deepPurple.withOpacity(0.3),
@@ -108,7 +103,6 @@ class _CompleteFormPageState extends State<AutocompletespinPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Title Form
                       Row(
                         children: [
                           Container(
@@ -138,7 +132,6 @@ class _CompleteFormPageState extends State<AutocompletespinPage> {
                       ),
                       const Divider(height: 32, color: Colors.purple),
 
-                      // Autocomplete Universitas
                       _buildAutocompleteField(
                         label: 'Universitas',
                         controller: _universityController,
@@ -153,7 +146,6 @@ class _CompleteFormPageState extends State<AutocompletespinPage> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Autocomplete Jurusan
                       _buildAutocompleteField(
                         label: 'Jurusan',
                         controller: _majorController,
@@ -168,7 +160,6 @@ class _CompleteFormPageState extends State<AutocompletespinPage> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Dropdown Jenjang Pendidikan
                       _buildDropdownField(
                         label: 'Jenjang Pendidikan',
                         value: _selectedEducationLevel,
@@ -183,7 +174,6 @@ class _CompleteFormPageState extends State<AutocompletespinPage> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Dropdown Tahun Masuk
                       _buildDropdownField(
                         label: 'Tahun Masuk',
                         value: _selectedYear,
@@ -198,7 +188,6 @@ class _CompleteFormPageState extends State<AutocompletespinPage> {
                       ),
                       const SizedBox(height: 32),
 
-                      // Tombol Submit dengan animasi
                       _buildSubmitButton(),
                     ],
                   ),
