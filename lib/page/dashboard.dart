@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pertemuan5/pertemuan/pertemuan5.dart';
 import 'package:pertemuan5/pertemuan/pertemuan6.dart';
 import 'package:pertemuan5/pertemuan/pertemuan7.dart';
@@ -43,6 +44,8 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -59,7 +62,6 @@ class DashboardPage extends StatelessWidget {
       ),
       body: CustomScrollView(
         slivers: [
-          // Widget Header Profil
           SliverToBoxAdapter(
             child: Container(
               margin: const EdgeInsets.fromLTRB(16, 20, 16, 10),
@@ -72,27 +74,33 @@ class DashboardPage extends StatelessWidget {
                     color: const Color(0xFF6C63FF).withOpacity(0.3),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
-                  )
+                  ),
                 ],
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 30,
                     backgroundColor: Colors.white,
-                    child: Icon(Icons.person, color: Color(0xFF6C63FF), size: 35),
+                    child: Icon(
+                      Icons.person,
+                      color: Color(0xFF6C63FF),
+                      size: 35,
+                    ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Selamat Datang,',
                         style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
                       Text(
-                        'Zaki',
-                        style: TextStyle(
+                        user?.displayName ??
+                            user?.email?.split('@')[0] ??
+                            "User",
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -105,7 +113,6 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
 
-          // Label Kategori Menu
           const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -120,7 +127,6 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
 
-          // Grid View Menu Pembelajaran
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             sliver: SliverGrid(
@@ -130,27 +136,21 @@ class DashboardPage extends StatelessWidget {
                 crossAxisSpacing: 16,
                 childAspectRatio: 1,
               ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final item = menuItems[index];
-                  return _buildMenuCard(
-                    context,
-                    title: item['title'],
-                    icon: item['icon'],
-                    // PERBAIKAN DI SINI: Menambahkan casting (item['color'] as Color?) dan nilai cadangan jika null
-                    color: (item['color'] as Color?) ?? Colors.blue,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => item['page'],
-                        ),
-                      );
-                    },
-                  );
-                },
-                childCount: menuItems.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final item = menuItems[index];
+                return _buildMenuCard(
+                  context,
+                  title: item['title'],
+                  icon: item['icon'],
+                  color: (item['color'] as Color?) ?? Colors.blue,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => item['page']),
+                    );
+                  },
+                );
+              }, childCount: menuItems.length),
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
